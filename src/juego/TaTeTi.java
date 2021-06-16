@@ -5,42 +5,104 @@ import java.util.Scanner;
 public class TaTeTi {
 
 	public static void main(String[] args) {
-		int coordenadaFila, coordenadaColumna;
+		int coordenadaFila, coordenadaColumna, contador;
+		contador = 0;
+		String mensaje = " ";
 		String[][] tablero = { { "___", "___", "___" }, { "___", "___", "___" }, { "___", "___", "___" } };
+		Scanner sc = new Scanner(System.in);
 		reglasDelJuego();
 		System.out.println("Jugador 1 - ingrese las coordenadas donde desea colocar la ficha:");
-		Scanner sc = new Scanner(System.in);
 		coordenadaFila = sc.nextInt();
 		coordenadaColumna = sc.nextInt();
-		while (tablero[0][0] != tablero[0][2] && tablero[1][0] != tablero[1][2] && tablero[2][0] != tablero[2][2]
-				&& tablero[0][0] != tablero[2][0] && tablero[0][1] != tablero[2][1] && tablero[0][2] != tablero[2][2]
-				&& tablero[0][0] != tablero[2][2] && tablero[0][2] != tablero[2][0]) {
-			if (tablero[coordenadaFila][coordenadaColumna] == "___") {
-				tablero[coordenadaFila][coordenadaColumna] = " X ";
-				System.out.println(tablero[0][0] + "|" + tablero[0][1] + "|" + tablero[0][2]);
-				System.out.println(tablero[1][0] + "|" + tablero[1][1] + "|" + tablero[1][2]);
-				System.out.println(tablero[2][0] + "|" + tablero[2][1] + "|" + tablero[2][2]);
-			} else {
-				System.out.println("Ya hay una ficha en esas coordenadas");
+		if (tablero[coordenadaFila][coordenadaColumna].equals("___")) {
+			tablero[coordenadaFila][coordenadaColumna] = " X ";
+			mostrarTablero(tablero);
 			}
-			{
+		else {
+			System.out.println("Ya hay una ficha en esas coordenadas");
 			}
-			System.out.println("Jugador 2 - ingrese las coordenadas donde desea colocar la ficha:");
-			coordenadaFila = sc.nextInt();
-			coordenadaColumna = sc.nextInt();
-			if (tablero[coordenadaFila][coordenadaColumna] == "___") {
-				tablero[coordenadaFila][coordenadaColumna] = " O ";
-				System.out.println(tablero[0][0] + "|" + tablero[0][1] + "|" + tablero[0][2]);
-				System.out.println(tablero[1][0] + "|" + tablero[1][1] + "|" + tablero[1][2]);
-				System.out.println(tablero[2][0] + "|" + tablero[2][1] + "|" + tablero[2][2]);
-			} else {
-				System.out.println("Ya hay una ficha en esas coordenadas");
+		System.out.println("Jugador 2 - ingrese las coordenadas donde desea colocar la ficha:");
+		coordenadaFila = sc.nextInt();
+		coordenadaColumna = sc.nextInt();
+		if (tablero[coordenadaFila][coordenadaColumna].equals("___")) {
+			tablero[coordenadaFila][coordenadaColumna] = " O ";
+			mostrarTablero(tablero);
+			} 
+		else {
+			System.out.println("Ya hay una ficha en esas coordenadas");
 			}
-			System.out.println("Jugador 1 - ingrese las coordenadas donde desea colocar la ficha:");
-			coordenadaFila = sc.nextInt();
-			coordenadaColumna = sc.nextInt();
+		while ((mensaje != "HAY UN GANADOR") || (mensaje != "ES UN EMPATE")) {
+			if ((tablero[0][0] != "___") && (tablero[0][0] == tablero[0][1] && tablero[0][1] == tablero[0][2]) || (tablero[1][0] != "___") && (tablero[1][0] == tablero[1][1] && tablero[1][1] == tablero[1][2])
+					|| (tablero[2][0] != "___") && (tablero[2][0] == tablero[2][1] && tablero[2][1] == tablero[2][2]) || (tablero[0][0] != "___") && (tablero[0][0] == tablero[1][0] && tablero[1][0] == tablero[2][0]) || (tablero[0][1] != "___") && (tablero[0][1] == tablero[1][1] && tablero[1][1] == tablero[2][1])
+					||(tablero[0][2] != "___") && (tablero[0][2] == tablero[1][2] && tablero[1][2] == tablero[2][2]) || (tablero[0][0] != "___") && (tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) || (tablero[1][1] != "___") && (tablero[2][0] == tablero[1][1] && tablero[1][1] == tablero[0][2])) {
+					System.out.println(mensaje = "HAY UN GANADOR");
+				}
+			if (contador == 0) {
+				for (int i=0; i < tablero.length; i++) {
+					for (int j=0; j < tablero.length; j++) {
+						if ((tablero[i][j].equals(" X ")) || (tablero[i][j].equals(" O "))) {
+							contador ++;
+						}
+					}
+				}
+				if (contador == 9) {
+					System.out.println(mensaje = "ES UN EMPATE");
+				}
+			}
+			else {
+				System.out.println("Jugador 1 - ingrese las coordenadas donde desea colocar la ficha:");
+				coordenadaFila = sc.nextInt();
+				coordenadaColumna = sc.nextInt();
+				if (tablero[coordenadaFila][coordenadaColumna].equals("___")) {
+					tablero[coordenadaFila][coordenadaColumna] = " X ";
+					mostrarTablero(tablero);
+					}
+				else {
+					System.out.println("Ya hay una ficha en esas coordenadas");
+					}
+				}
+				if ((tablero[0][0] != "___") && (tablero[0][0] == tablero[0][1] && tablero[0][1] == tablero[0][2]) || (tablero[1][0] != "___") && (tablero[1][0] == tablero[1][1] && tablero[1][1] == tablero[1][2])
+						|| (tablero[2][0] != "___") && (tablero[2][0] == tablero[2][1] && tablero[2][1] == tablero[2][2]) || (tablero[0][0] != "___") && (tablero[0][0] == tablero[1][0] && tablero[1][0] == tablero[2][0]) || (tablero[0][1] != "___") && (tablero[0][1] == tablero[1][1] && tablero[1][1] == tablero[2][1])
+						||(tablero[0][2] != "___") && (tablero[0][2] == tablero[1][2] && tablero[1][2] == tablero[2][2]) || (tablero[0][0] != "___") && (tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) || (tablero[1][1] != "___") && (tablero[2][0] == tablero[1][1] && tablero[1][1] == tablero[0][2])) {
+						System.out.println(mensaje = "HAY UN GANADOR");
+					}
+				if (contador == 0) {
+					for (int i=0; i < tablero.length; i++) {
+						for (int j=0; j < tablero.length; j++) {
+							if ((tablero[i][j].equals(" X ")) || (tablero[i][j].equals(" O "))) {
+								contador ++;
+							}
+						}
+					}
+					if (contador == 9) {
+						System.out.println(mensaje = "ES UN EMPATE");
+					}
+				}
+				else {
+				System.out.println("Jugador 2 - ingrese las coordenadas donde desea colocar la ficha:");
+				coordenadaFila = sc.nextInt();
+				coordenadaColumna = sc.nextInt();
+				if (tablero[coordenadaFila][coordenadaColumna].equals("___")) {
+					tablero[coordenadaFila][coordenadaColumna] = " O ";
+					mostrarTablero(tablero);
+					}
+				else {
+					System.out.println("Ya hay una ficha en esas coordenadas");
+					}
+				}
 		}
-		System.out.println("¡HAY UN GANADOR!");
+		mensajeFinDelJuego(tablero);
+	}
+
+	private static void mensajeFinDelJuego(String[][] tablero) {
+		System.out.println("EL GANADOR FUE:");
+		mostrarTablero(tablero);
+		System.out.println("!FELICIDADES¡");
+		System.out.println("");
+		System.out.println("FIN DEL JUEGO");
+	}
+
+	private static void mostrarTablero(String[][] tablero) {
 		System.out.println(tablero[0][0] + "|" + tablero[0][1] + "|" + tablero[0][2]);
 		System.out.println(tablero[1][0] + "|" + tablero[1][1] + "|" + tablero[1][2]);
 		System.out.println(tablero[2][0] + "|" + tablero[2][1] + "|" + tablero[2][2]);
