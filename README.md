@@ -1,2 +1,5 @@
-# TA-TE-TI
-Juego del TA-TE-TI
+# **TA-TE-TI**
+
+##Juego del TA-TE-TI/TIC-TAC-TOE/TRES EN LINEA
+
+
